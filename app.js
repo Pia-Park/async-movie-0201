@@ -41,14 +41,14 @@ function showMovies(movies) {
 
         //manipulate the newly created element's innerHTML (I called it movieEl in this sample)
         movieEl.innerHTML = `
-            <img src="${IMG_PATH + movie.poster_path}" alt="movie image">
+            <img src="${IMG_PATH + poster_path}" alt="movie image">
             <div class="movie-info">
-          <h3>${movie.original_title}</h3>
-          <span class="${getClassByRate(movie.vote_average)}">${movie.vote_average}</span>
+          <h3>${original_title}</h3>
+          <span class="${getClassByRate(vote_average)}">${vote_average}</span>
             </div>
             <div class="overview">
           <h3>Overview</h3>
-          ${movie.overview}
+          ${overview}
         </div>
         `
         //append the movieEl to main

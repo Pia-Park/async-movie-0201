@@ -23,37 +23,7 @@ async function getMovies(url){
 
 }
 
-// function showMovies(movies) {
-//     main.innerHTML = ''
 
-//     movies.forEach((movie) => {
-//         //destructure the movie object
-//         // const { ???, ??? ,vote_average } = movie //include the "vote_average"
-//         const {original_title, overview, vote_average} = movie;
-
-//         //create a div element
-//         //add a "movie" class in that div 
-    
-//         movie.innerHTML = document.createElement('div');
-//         movie.innerHTML.setAttribute('class', 'movie');
-//         main.appendChild(movie);
-
-//         //manipulate the newly created element's innerHTML (I called it movieEl in this sample)
-//         movieEl.innerHTML = `
-//             <img src="${backdrop_path}" alt="movie image">
-//             <div class="movie-info">
-//           <h3 class="${original_title}">${original_title}</h3>
-//           <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-//             </div>
-//             <div class="overview">
-//           <h3>Overview</h3>
-//           ${overview}
-//         </div>
-//         `
-//         //append the movieEl to main
-//         main.appendChild(movieEl);
-//     });
-// }
 
 function showMovies(movies) {
     main.innerHTML = ''

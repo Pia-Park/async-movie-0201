@@ -18,42 +18,42 @@ getMovies(API_URL)
 async function getMovies(url){
     const response = await fetch(url)
     const { results } = await response.json();
-    // showMovies(response);
     console.log(results);
+    showMovies(results);
 
 }
 
-function showMovies(movies) {
-    main.innerHTML = ''
+// function showMovies(movies) {
+//     main.innerHTML = ''
 
-    movies.forEach((movie) => {
-        //destructure the movie object
-        // const { ???, ??? ,vote_average } = movie //include the "vote_average"
-        const {original_title, overview, vote_average} = movie;
+//     movies.forEach((movie) => {
+//         //destructure the movie object
+//         // const { ???, ??? ,vote_average } = movie //include the "vote_average"
+//         const {original_title, overview, vote_average} = movie;
 
-        //create a div element
-        //add a "movie" class in that div 
+//         //create a div element
+//         //add a "movie" class in that div 
     
-        movie.innerHTML = document.createElement('div');
-        movie.innerHTML.setAttribute('class', 'movie');
-        main.appendChild(movie);
+//         movie.innerHTML = document.createElement('div');
+//         movie.innerHTML.setAttribute('class', 'movie');
+//         main.appendChild(movie);
 
-        //manipulate the newly created element's innerHTML (I called it movieEl in this sample)
-        movieEl.innerHTML = `
-            <img src="${backdrop_path}" alt="movie image">
-            <div class="movie-info">
-          <h3 class="${original_title}">${original_title}</h3>
-          <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-            </div>
-            <div class="overview">
-          <h3>Overview</h3>
-          ${overview}
-        </div>
-        `
-        //append the movieEl to main
-        main.appendChild(movieEl);
-    });
-}
+//         //manipulate the newly created element's innerHTML (I called it movieEl in this sample)
+//         movieEl.innerHTML = `
+//             <img src="${backdrop_path}" alt="movie image">
+//             <div class="movie-info">
+//           <h3 class="${original_title}">${original_title}</h3>
+//           <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+//             </div>
+//             <div class="overview">
+//           <h3>Overview</h3>
+//           ${overview}
+//         </div>
+//         `
+//         //append the movieEl to main
+//         main.appendChild(movieEl);
+//     });
+// }
 
 function showMovies(movies) {
     main.innerHTML = ''
@@ -61,24 +61,24 @@ function showMovies(movies) {
     movies.forEach((movie) => {
         //destructure the movie object
         // const { ???, ??? ,vote_average } = movie //include the "vote_average"
-        const {original_title, overview, vote_average} = movie;
+        const {poster_path, original_title, overview, vote_average} = movie;
 
         //create a div element
         //add a "movie" class in that div 
-        
         const movieEl = document.createElement('div');
-        movieEl.setAttribute('class', 'movie');
+        movieEl.classList.add('movie');
+        // movieEl.setAttribute('class', 'movie');
 
         //manipulate the newly created element's innerHTML (I called it movieEl in this sample)
         movieEl.innerHTML = `
-            <img src="${backdrop_path}" alt="movie image">
+            <img src="${IMG_PATH + movie.poster_path}" alt="movie image">
             <div class="movie-info">
-          <h3 class="${original_title}">${original_title}</h3>
-          <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+          <h3 class="${movie.original_title}">${movie.original_title}</h3>
+          <span class="${getClassByRate(movie.vote_average)}">${movie.vote_average}</span>
             </div>
             <div class="overview">
           <h3>Overview</h3>
-          ${overview}
+          ${movie.overview}
         </div>
         `
         //append the movieEl to main
@@ -98,15 +98,17 @@ function getClassByRate(vote) {
 
 form.addEventListener('submit', (e) => {
     //prevent refresh
+    e.preventDefault();
 
     //const searchTerm = ???  //assign the value of the input's value
-    const searchTerm = document.querySelector('submit').value;
+    const searchTerm = search.value;
 
     if(searchTerm && searchTerm !== '') {
         //call the getMovies function and pass the concatenated value of SEARCH_API + searchTerm
         getMovies(SEARCH_API + searchTerm)
 
         //reset the input's value
+        searchTerm = "";
     } else {
         window.location.reload()
     }
